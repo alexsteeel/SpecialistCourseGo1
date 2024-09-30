@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 func main() {
@@ -28,4 +29,9 @@ func main() {
 	// Операция взятия остатка
 	remainder := int(check) % 3
 	fmt.Println("remainder:", remainder)
+
+	// Операция возведения в степень
+	var aa int = 2
+	total := math.Pow(float64(aa), 10)
+	fmt.Printf("total = %.2f\n", total)
 }
