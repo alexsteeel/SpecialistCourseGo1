@@ -8,7 +8,7 @@ import (
 /*
 Задача №3
 
-На входе размер вклада(float64), кол-во лет(float64) и процент по вкладу(int64)
+На входе размер вклада(float64), кол-во лет(int64) и процент по вкладу(int64)
 Проверить условия (от и до включительно):
 вклад от 100 до 1_000_000
 кол-во лет от 1 до 100
@@ -30,7 +30,7 @@ func main() {
 		return
 	}
 
-	var depositYears float64
+	var depositYears int64
 	fmt.Println("Введите кол-во лет вклада")
 	fmt.Scan(&depositYears)
 
@@ -48,7 +48,7 @@ func main() {
 		return
 	}
 
-	var result = depositAmount * math.Pow(1+float64(depositPercents)/100, depositYears)
-	fmt.Printf("Итоговый размер вклада c начальной суммой %.2f под %d%% на %.0f лет: %.2f\n",
+	var result = depositAmount * math.Pow(1+float64(depositPercents)/100, float64(depositYears))
+	fmt.Printf("Итоговый размер вклада c начальной суммой %.2f под %d%% на %d лет: %.2f\n",
 		depositAmount, depositPercents, depositYears, result)
 }
