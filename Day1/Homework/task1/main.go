@@ -17,11 +17,13 @@ func main() {
 	var consumption uint8
 	const minConsumption uint8 = 5
 	const maxConsumption uint8 = 25
-	fmt.Printf("Введите расход в литрах на 100 км от %d до %d км.\n", minConsumption, maxConsumption)
+	fmt.Printf("Введите расход в литрах на 100 км от %d до %d км.\n",
+		minConsumption, maxConsumption)
 	fmt.Scan(&consumption)
 
 	if consumption < minConsumption || consumption > maxConsumption {
-		fmt.Printf("Расход в литрах должен быть от %d до %d.\n", minConsumption, maxConsumption)
+		fmt.Printf("Расход в литрах должен быть от %d до %d.\n",
+			minConsumption, maxConsumption)
 		return
 	}
 

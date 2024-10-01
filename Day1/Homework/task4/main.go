@@ -12,7 +12,7 @@ func main() {
 			number = -number
 		}
 
-		firstTwoDigits := number / 100 % 100
+		firstTwoDigits := number / 100
 		lastReversedTwoDigits := number%10*10 + number/10%10
 		if firstTwoDigits == lastReversedTwoDigits {
 			fmt.Printf("Число %d является палиндромом.", number)

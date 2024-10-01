@@ -9,33 +9,17 @@ func main() {
 	fmt.Scan(&number2)
 	fmt.Scan(&number3)
 
-	fmt.Println("Три числа, отсортированные в порядке возрастания:")
-	if number1 < number2 && number1 < number3 {
-		fmt.Print(number1)
-		if number2 < number3 {
-			fmt.Printf(" %d", number2)
-			fmt.Printf(" %d", number3)
-		} else {
-			fmt.Printf(" %d", number3)
-			fmt.Printf(" %d", number2)
-		}
-	} else if number2 < number1 && number2 < number3 {
-		fmt.Print(number2)
-		if number1 < number3 {
-			fmt.Printf(" %d", number1)
-			fmt.Printf(" %d", number3)
-		} else {
-			fmt.Printf(" %d", number3)
-			fmt.Printf(" %d", number1)
-		}
-	} else {
-		fmt.Print(number3)
-		if number1 < number2 {
-			fmt.Printf(" %d", number1)
-			fmt.Printf(" %d", number2)
-		} else {
-			fmt.Printf(" %d", number2)
-			fmt.Printf(" %d", number1)
-		}
+	if number1 > number2 {
+		number1, number2 = number2, number1
 	}
+
+	if number2 > number3 {
+		number2, number3 = number3, number2
+	}
+
+	if number1 > number2 {
+		number1, number2 = number2, number1
+	}
+
+	fmt.Printf("Три числа, отсортированные в порядке возрастания: %d %d %d\n", number1, number2, number3)
 }
