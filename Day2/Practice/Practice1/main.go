@@ -10,19 +10,18 @@ func main() {
 	fmt.Scan(&number)
 
 	var sum uint32 = 0
-	sumStr := ""
-	digit := 0
-	for i := 1; digit == 0; i++ {
+	statement := ""
+	for number != 0 {
 		digit := number % 10
-		number = number / 10
+		number /= 10
 		sum += digit
 		strDigit := fmt.Sprintf("%d", digit)
 
-		if i == 1 {
-			sumStr = strDigit
+		if len(statement) == 0 {
+			statement = strDigit
 		} else {
-			sumStr = sumStr + " + " + strDigit
+			statement = statement + " + " + strDigit
 		}
 	}
-	fmt.Printf("%v = %d\n", sumStr, sum)
+	fmt.Printf("%v = %d\n", statement, sum)
 }
