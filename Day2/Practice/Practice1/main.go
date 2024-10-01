@@ -15,12 +15,11 @@ func main() {
 		digit := number % 10
 		number /= 10
 		sum += digit
-		strDigit := fmt.Sprintf("%d", digit)
 
 		if len(statement) == 0 {
-			statement = strDigit
+			statement = fmt.Sprintf("%d", digit)
 		} else {
-			statement = statement + " + " + strDigit
+			statement = statement + " + " + fmt.Sprintf("%d", digit)
 		}
 	}
 	fmt.Printf("%v = %d\n", statement, sum)
