@@ -7,21 +7,6 @@ import (
 	"strings"
 )
 
-type Bits uint8
-
-const (
-	ASC Bits = 1 << iota
-	WASC
-	DESC
-	WDESC
-	CONST
-	RAND
-)
-
-func Set(b, flag Bits) Bits   { return b | flag }
-func Clear(b, flag Bits) Bits { return b &^ flag }
-func Has(b, flag Bits) bool   { return b&flag != 0 }
-
 func main() {
 
 	fmt.Println("Введите 5 чисел через пробел.")
@@ -31,62 +16,33 @@ func main() {
 		numbers = scanner.Text()
 	}
 
-	array := strings.Split(numbers, " ")
-	current := array[0]
-	next := array[1]
+	array := strings.Fields(numbers)
 
-	var b Bits
-	b = Set(b, RAND)
-
-	if current > next {
-		b = Set(b, DESC)
-		b = Set(b, WDESC)
-	} else if current < next {
-		b = Set(b, ASC)
-		b = Set(b, WASC)
-	} else {
-		b = Set(b, WDESC)
-		b = Set(b, WASC)
-		b = Set(b, CONST)
-	}
-
-	for i := 2; i < 5; i++ {
-		current = next
-		next = array[i]
-
-		if current > next {
-			b = Clear(b, ASC)
-			b = Clear(b, WASC)
-			b = Clear(b, CONST)
-		} else if current < next {
-			b = Clear(b, DESC)
-			b = Clear(b, WDESC)
-			b = Clear(b, CONST)
+	var asc, desc, constant bool
+	for i := 0; i < 4; i++ {
+		if array[i] > array[i+1] {
+			desc = true
+		} else if array[i] < array[i+1] {
+			asc = true
 		} else {
-			b = Clear(b, ASC)
-			b = Clear(b, DESC)
+			constant = true
 		}
 	}
 
-	for _, flag := range []Bits{CONST, ASC, WASC, DESC, WDESC, RAND} {
-		if Has(b, flag) {
-			switch flag {
-			case ASC:
-				fmt.Println("ASCENDING")
-			case WASC:
-				fmt.Println("WEAKLY ASCENDING")
-			case DESC:
-				fmt.Println("DESCENDING")
-			case WDESC:
-				fmt.Println("WEAKLY DESCENDING")
-			case CONST:
-				fmt.Println("CONSTANT")
-			case RAND:
-				fmt.Println("RANDOM")
-			default:
-				fmt.Println("UNKNOWN")
-			}
-			break
-		}
+	switch {
+	case asc && desc && constant:
+		fmt.Println("RANDOM")
+	case asc && constant:
+		fmt.Println("WEAKLY ASCENDING")
+	case asc:
+		fmt.Println("ASCENDING")
+	case desc && constant:
+		fmt.Println("WEAKLY DESCENDING")
+	case desc:
+		fmt.Println("DESCENDING")
+	case constant:
+		fmt.Println("CONSTANT")
+	default:
+		fmt.Println("UNKNOWN")
 	}
 }
