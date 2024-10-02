@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"strconv"
+	"unicode/utf8"
 )
 
 func main() {
@@ -87,8 +88,8 @@ func main() {
 	for i := 0; i < 5; i++ {
 		var word string
 		fmt.Scan(&word)
-		if len(word) > maxLength {
-			maxLength = len(word)
+		if utf8.RuneCountInString(word) > maxLength {
+			maxLength = utf8.RuneCountInString(word)
 			theLongestWord = word
 		}
 	}
