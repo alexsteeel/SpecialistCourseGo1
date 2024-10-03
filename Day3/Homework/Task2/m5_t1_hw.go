@@ -22,7 +22,7 @@ one uppercase letter and one special character: _!@#$%^&`)
 		isSuccess, errors := checkPassword(password)
 		if isSuccess {
 			fmt.Println("Password is valid")
-			break
+			return
 		}
 		fmt.Println(errors)
 	}
@@ -41,7 +41,8 @@ func checkPassword(password string) (isSuccess bool, errors string) {
 	const minLength = 8
 	const maxLength = 15
 	if len(password) < minLength || len(password) > maxLength {
-		return false, "Password length must be between 8 and 15 characters"
+		message := fmt.Sprintf("Password length must be between %d and %d characters", minLength, maxLength)
+		return false, message
 	}
 
 	requiredCharacters := map[int]string{
