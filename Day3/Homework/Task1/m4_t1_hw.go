@@ -22,7 +22,7 @@ func main() {
 
 	encryptedString := stringToCode(stringForEncrypt, alphabetEncryptMap)
 	fmt.Println("Encrypted string:", encryptedString)
-	fmt.Println("Decrypted again string:", codeToString(encryptedString, 2, alphabetDecryptMap))
+	fmt.Println("Decrypted again string:", codeToString(encryptedString, alphabetDecryptMap, 2))
 
 	fmt.Println("Enter the string to decrypt:")
 	stringForDecrypt := ""
@@ -30,7 +30,7 @@ func main() {
 		stringForDecrypt = scanner.Text()
 	}
 
-	fmt.Println("Decrypted string:", codeToString(stringForDecrypt, 2, alphabetDecryptMap))
+	fmt.Println("Decrypted string:", codeToString(stringForDecrypt, alphabetDecryptMap, 2))
 }
 
 func getAlphabetEncryptMap() map[rune]string {
@@ -69,7 +69,7 @@ func stringToCode(text string, ciphers map[rune]string) string {
 	return codeBuilder.String()
 }
 
-func codeToString(code string, codeLength int, ciphers map[string]rune) string {
+func codeToString(code string, ciphers map[string]rune, codeLength int) string {
 	decryptedLength := utf8.RuneCountInString(code) / codeLength
 	decrypted := make([]rune, decryptedLength)
 	for i := 0; i < utf8.RuneCountInString(code); i += codeLength {
