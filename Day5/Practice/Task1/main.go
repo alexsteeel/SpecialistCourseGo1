@@ -35,7 +35,9 @@ func main() {
 
 	for _, page := range pages {
 		go responseSize(page, pagesChan)
-		resPage := <-pagesChan
-		fmt.Println(resPage)
+	}
+
+	for pageRes := range pagesChan {
+		fmt.Println(pageRes)
 	}
 }
