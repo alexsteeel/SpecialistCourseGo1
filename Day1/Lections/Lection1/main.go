@@ -2,7 +2,16 @@ package main
 
 import "fmt"
 
+func getBool(flag bool) bool {
+	return !flag
+}
+
 func main() {
+	var flag bool = false
+	test, flag := true, getBool(flag)
+	test2, flag := true, getBool(flag)
+	fmt.Println(test,test2, flag)
+
 	fmt.Println("Hello, World!")
 
 	var age int

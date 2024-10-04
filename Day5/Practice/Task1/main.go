@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
+	"log"
 	"net/http"
 )
 
@@ -13,12 +14,18 @@ type Page struct {
 
 func responseSize(url string, pagesChan chan Page) {
 	// Получить URL:
-	response, _ := http.Get(url)
+	response, err := http.Get(url)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	defer response.Body.Close()
 
 	// Получить тело ответа
-	body, _ := ioutil.ReadAll(response.Body)
+	body, err := io.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
 	pagesChan <- Page{url, len(body)}
 }
 
@@ -37,7 +44,8 @@ func main() {
 		go responseSize(page, pagesChan)
 	}
 
-	for pageRes := range pagesChan {
-		fmt.Println("URL:", pageRes.URL, "Size:", pageRes.Size)
+	for i := 0; i < len(pages); i++ {
+		page := <-pagesChan
+		fmt.Println("URL:", page.URL, "Size:", page.Size)
 	}
 }
