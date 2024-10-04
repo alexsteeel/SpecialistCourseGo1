@@ -38,6 +38,6 @@ func main() {
 	}
 
 	for pageRes := range pagesChan {
-		fmt.Println(pageRes)
+		fmt.Println("URL:", pageRes.URL, "Size:", pageRes.Size)
 	}
 }
